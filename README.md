@@ -1,14 +1,18 @@
 # Latino-animacionASCII
 
-VERSION 0.1
+### VERSIÓN 0.1
 
-Animation ASCII desarrollada en Latino por Melvin Guerrero.
+Animación ASCII desarrollada en Latino por Melvin Guerrero.
 
 Oct. 26, 2021 :: 3:32 PM
 
-Basado en el ejemplo de "Stone Story RPG" por Martian Rex, enlace:
+### Basado en el ejemplo de "Stone Story RPG" por Martian Rex, enlace:
 
 https://stonestoryrpg.com/ascii_tutorial.html
+
+Animación por Martian Rex: (NO LATINO)
+
+![animacionASCII](.readme/nagaraja_full_2_compressed.gif)
 
 TODO:
   - mejorar el consume de memoria en latino
