@@ -1,0 +1,96 @@
+/*
+VERSION 0.1
+
+Animation ASCII desarrollada en Latino por Melvin Guerrero.
+Oct. 26, 2021 :: 3:32 PM
+
+Basado en el ejemplo de "Stone Story RPG" por Martian Rex, enlace:
+https://stonestoryrpg.com/ascii_tutorial.html
+
+TODO:
+    *mejorar el consume de memoria en latino
+    *Remover flick en animaciones
+    *ignorar espacios en blanco en personajes
+    *imprimir en colores
+
+*/
+si sis.operativo("WIN32")   //WINDOWS
+    a = incluir ("modulos\\animaciones")
+    sis.ejecutar('echo off')
+    sis.ejecutar('printf("\e[?25l");')
+sino                        //UNIX
+    a = incluir ("modulos/animaciones")
+fin
+
+limpiar()
+
+tiempo  = 0
+fps     = 0.1
+obj     = []        //[id], fotograma_actual, FPS
+
+funcion impGrafico(g, x, y)
+    sis.iraxy(x,y)
+    desde (i=0; i<cadena.longitud(g); i++)
+        si (cadena.es_igual(g[i], "\n"))
+            y++
+            sis.iraxy(x,y)
+        osi (cadena.es_igual(g[i], "#"))
+            sis.iraxy(x,y)
+        sino
+            imprimirf(g[i])
+        fin
+    fin
+fin
+
+funcion fps_control(t)
+    resp = falso
+
+    t = t*10
+
+    si tiempo < t
+        tiempo++
+    sino
+        tiempo = 0
+        resp = verdadero
+    fin
+
+    retorno resp
+fin
+
+funcion impAnimacion(graf, posX, posY, tmp, id)
+    si (obj[id] != "")
+        e       = obj[id][0]
+        tiempo  = obj[id][1]
+    sino
+        e       = 0
+        tiempo  = 0
+    fin
+
+    si (e<lista.longitud(graf))
+        //imprimir fotograma clave del momento
+        si (fps_control(tmp))
+            e++
+            impGrafico(graf[e], posX, posY)
+        sino
+            impGrafico(graf[e], posX, posY)
+        fin
+        obj[id] = [e, tiempo]
+    sino
+        obj[id] = [0, 0]
+    fin
+fin
+
+sis.iraxy(0,0)
+escribir(a.bg)
+impGrafico(a.vela_base[0], 13, 6)
+mientras verdadero
+    impAnimacion(a.vela,            17, 8, 0.5, 0)
+    impAnimacion(a.monge_izq,       18, 15, 0.5, 1)
+    impAnimacion(a.ofrenda,         29, 12, 10, 2)
+    impAnimacion(a.monge_der,       43, 15, 0.5, 3)
+    impAnimacion(a.monge_izq,       15, 19, 0.5, 4)
+    impAnimacion(a.monge_centro,    28, 23, 0.5, 5)
+    impAnimacion(a.monge_der,       46, 19, 0.5, 6)
+    // impAnimacion(a.monstruo,        27, 19, 0.1, 7)  //imprimir de forma invertida
+    sis.dormir(fps)
+fin

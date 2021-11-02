@@ -1,0 +1,58 @@
+tiempo  = 0
+obj     = []        //[id], fotograma_actual, FPS
+
+funcion impGrafico(g, x, y)
+    sis.iraxy(x,y)
+    desde (i=0; i<cadena.longitud(g); i++)
+        si (cadena.es_igual(g[i], "\n"))
+            y++
+            sis.iraxy(x,y)
+        sino
+            imprimirf(g[i])
+        fin
+    fin
+fin
+
+funcion fps_control(t)
+    resp = falso
+
+    t = t*10
+
+    si tiempo < t
+        tiempo++
+    sino
+        tiempo = 0
+        resp = verdadero
+    fin
+
+    retorno resp
+fin
+
+
+funcion impAnimacion(graf, posX, posY, tmp, id)
+    si (obj[id] != "")
+        e       = obj[id][0]
+        tiempo  = obj[id][1]
+    sino
+        e       = 0
+        tiempo  = 0
+    fin
+
+    si (e<lista.longitud(graf))
+        //imprimir fotograma clave del momento
+        si (fps_control(tmp))
+            e++
+            impGrafico(graf[e], posX, posY)
+        sino
+            impGrafico(graf[e], posX, posY)
+        fin
+        obj[id] = [e, tiempo]
+    sino
+        obj[id] = [0, 0]
+    fin
+fin
+
+retornar {
+    "impGrafico"                : impGrafico,
+    "impAnimacion"              : impAnimacion
+}

@@ -1,0 +1,84 @@
+/*
+VERSION 0.1
+
+Animation ASCII desarrollada en Latino por Melvin Guerrero.
+Oct. 26, 2021 :: 3:32 PM
+
+Basado en el ejemplo de "Stone Story RPG" por Martian Rex, enlace:
+https://stonestoryrpg.com/ascii_tutorial.html
+
+TODO:
+    *mejorar el consume de memoria en latino
+    *Remover flick en animaciones
+    *ignorar espacios en blanco en personajes
+    *imprimir en colores
+
+*/
+
+si sis.operativo("WIN32")
+    a = incluir ("modulos\\animaciones")
+    f = incluir ("modulos\\funciones")
+    sis.ejecutar('echo off')
+    sis.ejecutar('printf("\e[?25l");')
+sino
+    a = incluir ("modulos/animaciones")
+    f = incluir ("modulos/funciones")
+fin
+
+limpiar()
+
+fps         = 0.1
+
+// // FUNCIONES
+// funcion aniMonge(i)
+// // limpiar()
+//     sis.iraxy(0,0)
+//     escribir(a.monge_izq[i])
+//     escribir(a.monge_centro[i])
+// // sis.dormir(5)
+//     si (i == 0) || (i == 3)
+//         sis.dormir(1.5)
+//     sino
+//         sis.dormir(0.1)
+//     fin
+// fin
+
+// funcion aniOfrenda(e)
+// // limpiar()
+//     sis.iraxy(0,0)
+//     escribir(a.ofrenda[e])
+//     sis.dormir(0.1)
+// fin
+
+// funcion aniVela(b)
+// // limpiar()
+//     sis.iraxy(0,0)
+//     escribir(a.vela[b])
+//     sis.dormir(0.5)
+// fin
+
+// funcion aniMostruo(m)
+// // limpiar()
+//     sis.iraxy(0,0)
+//     escribir(a.monstruo[m])
+//     sis.dormir(0.1)
+// fin
+
+
+mientras verdadero
+    sis.iraxy(0,0)
+    escribir(a.bg)
+    f.impGrafico(a.vela_base[0], 13, 6)
+    f.impAnimacion(a.vela, 17, 8, 0.5, 0)
+    f.impAnimacion(a.monge_izq, 18, 14, 0.7, 1)
+    sis.dormir(fps)
+
+    // si (i == 0)
+    //     desde (i=0; i<3; i++)   aniMonge(i) fin
+    // osi (i == 3)
+    //     desde (i=3; i>0; i--)   aniMonge(i) fin
+    // fin
+    // desde (e=0; e<5; e++)   aniOfrenda(e)   fin
+    // desde (b=0; b<lista.longitud(a.vela); b++) aniVela(b) fin
+    // desde (m=0; m<lista.longitud(a.monstruo); m++) aniMostruo(m) fin
+fin
